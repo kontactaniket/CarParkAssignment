@@ -47,6 +47,7 @@ public class CarParkingService {
                     , "Parking allotted for car: "+detail.getCar().getRegistration()
                     , 0.0);
         } catch (IllegalArgumentException ex) {
+            // LOG EXCEPTION
             return buildParkingDto(registration
                     , "Error occurred while allotting parking!!!"
                     , 0.0);
@@ -71,11 +72,14 @@ public class CarParkingService {
             detail.setActive(false);
             detail = detailsRepo.save(detail);
             return buildParkingDto(detail.getCar().getRegistration()
-                    , "Parking charges for car: "
-                            + detail.getCar().getRegistration()
-                            + " is: £" + charges
+                    , String.format("%s %s %s%s"
+                            ,"Parking charges for car:"
+                            , detail.getCar().getRegistration()
+                            , "is: £"
+                            , charges)
                     , charges);
         } catch (RuntimeException ex) {
+            // LOG EXCEPTION
             return buildParkingDto(registration
                     , "Error occurred while calculating charges. Please retry!!!"
                     , 0.0);

@@ -10,8 +10,7 @@ public class CarParkingBuilder {
         return ParkingDetails.builder()
                 .car(Car.builder()
                         .registration(registration)
-                        .build()
-                    )
+                        .build())
                 .inTime(LocalDateTime.now())
                 .isActive(true).build();
     }

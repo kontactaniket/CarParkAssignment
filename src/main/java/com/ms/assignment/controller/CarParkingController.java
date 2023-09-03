@@ -3,8 +3,8 @@ package com.ms.assignment.controller;
 import com.ms.assignment.dto.ParkingDtlDto;
 import com.ms.assignment.service.CarParkingService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,12 +15,14 @@ public class CarParkingController {
     private final CarParkingService service;
 
     @GetMapping(value = "/bookparkingslot")
-    public ParkingDtlDto bookParkingSlot(@RequestParam String registration) {
-        return service.bookParkingSlot(registration);
+    public ResponseEntity<ParkingDtlDto> bookParkingSlot(@RequestParam String registration) {
+        // Different response code can be sent depending on client.
+        return ResponseEntity.ok(service.bookParkingSlot(registration));
     }
 
     @GetMapping(value = "/calculatecharges")
-    public ParkingDtlDto calculateCharges(String registration) {
-        return service.calculateCharges(registration);
+    public ResponseEntity<ParkingDtlDto> calculateCharges(String registration) {
+        // Different response code can be sent depending on client.
+        return ResponseEntity.ok(service.calculateCharges(registration));
     }
 }
